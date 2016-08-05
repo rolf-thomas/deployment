@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Version 1.0, 2016-08-05
+
+# Load config
+source ./hooks/config
+
+if ! [ -t 0 ]; then
+  read -a ref
+fi
+
+# Get branch name from ref head
+IFS='/' read -ra REF <<< "${ref[2]}"
+branch="${REF[2]}"
+
+# In case of manual execution select $deploy_branch
+if [ "$branch" == "" ]; then
+  branch=$deploy_branch
+fi
+
+# If pushing to deploy_branch, deploy on target
+if [ "$deploy_branch" == "$branch" ]; then
+
+  echo "create temp folder"
+  tmpdir="/tmp/$repository_name/$branch"
+  mkdir -p $tmpdir
+
+  echo "clone branch"
+  git --work-tree=$tmpdir --git-dir="$repositry_path/$repository_name.git" checkout -f $branch > /dev/null
+
+  # start npm/grunt/deploy
+  echo "start npm/grunt/deploy"
+  cd $tmpdir && npm install && npm run grunt -- deploy
+
+  # - or - rsync directly to the target
+  # echo "rsync to $target"
+  # rsync -avz --delete "$tmpdir/" $target
+
+  # (optional) delete temp folder/clone
+  # rm -rf "/tmp/$repository_name"
+fi

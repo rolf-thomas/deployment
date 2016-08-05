@@ -1,0 +1,13 @@
+# config for automatic deployment with git, npm, grunt and rsync
+
+# path to repository (e.g. /var/repositories)
+repositry_path = "/var/repositories"
+
+# name of the repository (without .git)
+repository_name="example-repo"
+
+# branch to be auto-deployed
+deploy_branch="master"
+
+# target server (only if you deploy directly form the bash-script; otherwise npm/grunt has the info)
+target="user@server:/serverpath/to/files/"
