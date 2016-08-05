@@ -26,7 +26,7 @@ if [ "$deploy_branch" == "$branch" ]; then
   mkdir -p $tmpdir
 
   echo "clone branch"
-  git --work-tree=$tmpdir --git-dir="$repositry_path/$repository_name.git" checkout -f $branch > /dev/null
+  git --work-tree=$tmpdir --git-dir="$repository_path/$repository_name.git" checkout -f $branch > /dev/null
 
   # start npm/grunt/deploy
   echo "start npm/grunt/deploy"
