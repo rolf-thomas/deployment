@@ -1,4 +1,4 @@
-# Automatic deployment with git-hook, npm, grunt and/or rsync
+# Automated deploy with git-hook, npm, grunt and rsync
 
 ## User workflow
 
@@ -19,7 +19,7 @@ Git-push to $target_branch (e.g. master) results in automatic deployment and pus
 	- passwordless ssh access from git-server (e.g. user "ssh deploy@targetserver")
 	- target folder should be owned by deploy-user (group maybe www)
 - **Project**
-	- have a look at package.json and Gruntfile.js and at your configuration
+	- have a look at package.json and Gruntfile.js and add your configuration
 	- copy intern/deploy/rsync-excludes.txt and add files not to be deployed
 
 ## Technical workflow
